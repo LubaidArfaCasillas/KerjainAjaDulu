@@ -200,9 +200,8 @@
     margin-left: var(--sidebar-width);
     padding: var(--page-padding-top) var(--page-padding-h) var(--page-padding-bottom);
     flex: 1;
-    min-height: auto;
+    min-height: 100vh;
     background: var(--bg-main);
-    overflow-y: auto;
 }
 
 /* =====================
@@ -216,8 +215,6 @@
     gap: 16px;
     flex-wrap: wrap;
 }
-
-.page-header__left {}
 
 .page-title {
     font-size: 1.375rem;
