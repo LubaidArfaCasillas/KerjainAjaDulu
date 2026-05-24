@@ -9,14 +9,31 @@
     <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
     <link rel="stylesheet" href="{{ asset('css/components.css') }}">
     <link rel="stylesheet" href="{{ asset('css/pages/pages.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
     @stack('styles')
 </head>
 <body>
 
+{{-- ===== MOBILE NAVBAR (hanya muncul di HP) ===== --}}
+<div class="mobile-nav">
+    <div class="mobile-nav__logo">
+        <div class="mobile-nav__logo-icon">K</div>
+        <span class="mobile-nav__logo-text">KerjainAjaDulu</span>
+    </div>
+    <button class="mobile-nav__hamburger" id="hamburgerBtn" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</div>
+
+{{-- Overlay gelap saat sidebar terbuka di mobile --}}
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+
 <div class="app-wrapper">
 
     {{-- ===== SIDEBAR ===== --}}
-    <aside class="sidebar">
+    <aside class="sidebar" id="sidebar">
         <div class="sidebar__logo">
             <div class="sidebar__logo-icon">K</div>
             <span class="sidebar__logo-text">KerjainAjaDulu</span>
@@ -91,7 +108,7 @@
         </div>
     </aside>
 
-    {{-- ===== MAIN CONTENT (tidak ada topbar) ===== --}}
+    {{-- ===== MAIN CONTENT ===== --}}
     <main class="page-content">
         @if(session('success'))
             <div class="alert alert-success">✅ {{ session('success') }}</div>
@@ -107,8 +124,42 @@
 
 @stack('scripts')
 <script>
+    // Hamburger toggle sidebar di mobile
+    const hamburgerBtn  = document.getElementById('hamburgerBtn');
+    const sidebar       = document.getElementById('sidebar');
+    const overlay       = document.getElementById('sidebarOverlay');
+
+    function openSidebar() {
+        sidebar.classList.add('open');
+        overlay.classList.add('active');
+        hamburgerBtn.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeSidebar() {
+        sidebar.classList.remove('open');
+        overlay.classList.remove('active');
+        hamburgerBtn.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    hamburgerBtn.addEventListener('click', function () {
+        sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
+    });
+
+    // Tutup sidebar saat klik overlay
+    overlay.addEventListener('click', closeSidebar);
+
+    // Tutup sidebar saat klik link di mobile
+    sidebar.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function () {
+            if (window.innerWidth <= 768) closeSidebar();
+        });
+    });
+
+    // Dropdown toggle
     document.querySelectorAll('[data-toggle="dropdown"]').forEach(btn => {
-        btn.addEventListener('click', function(e) {
+        btn.addEventListener('click', function (e) {
             e.stopPropagation();
             this.nextElementSibling.classList.toggle('open');
         });
