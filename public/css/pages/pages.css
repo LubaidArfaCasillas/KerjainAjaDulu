@@ -398,3 +398,73 @@
     max-width: 360px;
     line-height: 1.6;
 }
+
+/* =====================
+   FORM PAGE WRAPPER
+   Dipakai di: create, edit, show
+   ===================== */
+.form-page-wrapper {
+    max-width: 680px;
+    width: 100%;
+}
+
+.form-page-header {
+    margin-bottom: 4px;
+}
+
+.form-card {
+    width: 100%;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-border);
+}
+
+/* Form error */
+.form-error {
+    font-size: 0.75rem;
+    color: var(--color-danger);
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Form hint */
+.form-hint {
+    font-size: 0.75rem;
+    color: var(--color-text-hint);
+    margin-top: 2px;
+}
+
+/* =====================
+   RESPONSIVE FORM PAGE
+   ===================== */
+@media (max-width: 768px) {
+    .form-page-wrapper {
+        max-width: 100%;
+    }
+
+    .form-actions {
+        flex-direction: row;
+        justify-content: flex-end;
+    }
+
+    .task-detail-layout {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .task-detail-sidebar {
+        width: 100%;
+    }
+
+    .task-info-card {
+        width: 100%;
+    }
+}

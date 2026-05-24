@@ -200,8 +200,9 @@
     margin-left: var(--sidebar-width);
     padding: var(--page-padding-top) var(--page-padding-h) var(--page-padding-bottom);
     flex: 1;
-    min-height: 100vh;
+    min-height: auto;
     background: var(--bg-main);
+    overflow-y: auto;
 }
 
 /* =====================

@@ -14,7 +14,7 @@
 </head>
 <body>
 
-{{-- ===== MOBILE NAVBAR (hanya muncul di HP) ===== --}}
+{{-- ===== MOBILE NAVBAR ===== --}}
 <div class="mobile-nav">
     <div class="mobile-nav__logo">
         <div class="mobile-nav__logo-icon">K</div>
@@ -27,7 +27,7 @@
     </button>
 </div>
 
-{{-- Overlay gelap saat sidebar terbuka di mobile --}}
+{{-- Overlay gelap --}}
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <div class="app-wrapper">
@@ -85,18 +85,16 @@
         </nav>
 
         <div class="sidebar__bottom">
+            {{-- Pengaturan --}}
             <a href="{{ route('settings') }}"
                class="{{ request()->routeIs('settings') ? 'active' : '' }}">
                 <span class="nav-icon"><i class="ti ti-settings"></i></span>
                 Pengaturan
             </a>
-            <a href="{{ route('account') }}"
-               class="{{ request()->routeIs('account') ? 'active' : '' }}">
-                <span class="nav-icon"><i class="ti ti-user"></i></span>
-                Akun
-            </a>
 
-            <div class="sidebar__user">
+            {{-- User info → klik untuk ke halaman akun --}}
+            <a href="{{ route('account') }}"
+               class="sidebar__user {{ request()->routeIs('account') ? 'active' : '' }}">
                 <div class="avatar avatar-sm avatar-primary">
                     {{ strtoupper(substr(auth()->user()->name ?? 'U', 0, 2)) }}
                 </div>
@@ -104,7 +102,7 @@
                     <div class="sidebar__user-name">{{ auth()->user()->name ?? 'User' }}</div>
                     <div class="sidebar__user-role">{{ auth()->user()->role ?? 'Member' }}</div>
                 </div>
-            </div>
+            </a>
         </div>
     </aside>
 
@@ -124,10 +122,9 @@
 
 @stack('scripts')
 <script>
-    // Hamburger toggle sidebar di mobile
-    const hamburgerBtn  = document.getElementById('hamburgerBtn');
-    const sidebar       = document.getElementById('sidebar');
-    const overlay       = document.getElementById('sidebarOverlay');
+    const hamburgerBtn = document.getElementById('hamburgerBtn');
+    const sidebar      = document.getElementById('sidebar');
+    const overlay      = document.getElementById('sidebarOverlay');
 
     function openSidebar() {
         sidebar.classList.add('open');
@@ -143,23 +140,20 @@
         document.body.style.overflow = '';
     }
 
-    hamburgerBtn.addEventListener('click', function () {
+    hamburgerBtn.addEventListener('click', () => {
         sidebar.classList.contains('open') ? closeSidebar() : openSidebar();
     });
 
-    // Tutup sidebar saat klik overlay
     overlay.addEventListener('click', closeSidebar);
 
-    // Tutup sidebar saat klik link di mobile
     sidebar.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', function () {
+        link.addEventListener('click', () => {
             if (window.innerWidth <= 768) closeSidebar();
         });
     });
 
-    // Dropdown toggle
     document.querySelectorAll('[data-toggle="dropdown"]').forEach(btn => {
-        btn.addEventListener('click', function (e) {
+        btn.addEventListener('click', function(e) {
             e.stopPropagation();
             this.nextElementSibling.classList.toggle('open');
         });

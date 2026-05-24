@@ -8,15 +8,7 @@
         <p class="page-subtitle">{{ now()->isoFormat('dddd, D MMMM Y') }}</p>
     </div>
     <div class="page-header__actions">
-        {{-- Search bar --}}
-        <div class="search-bar">
-            <span class="search-bar__icon">
-                <i class="ti ti-search"></i>
-            </span>
-            <input type="text" placeholder="Cari tugas..." id="searchInput">
-        </div>
-
-        {{-- HANYA 1 tombol tambah tugas --}}
+        {{-- Hanya tombol tambah tugas, tanpa search bar --}}
         <a href="{{ route('tasks.create') }}" class="btn btn-primary">
             <i class="ti ti-plus"></i> Tambah Tugas
         </a>
@@ -35,7 +27,6 @@
             </span>
             <span class="board-col__count">{{ $todoTasks->count() }}</span>
         </div>
-
         @forelse($todoTasks as $task)
             <div class="task-card">
                 <a href="{{ route('tasks.show', $task) }}" class="task-card__title">
@@ -82,7 +73,6 @@
             </span>
             <span class="board-col__count">{{ $inProgressTasks->count() }}</span>
         </div>
-
         @forelse($inProgressTasks as $task)
             <div class="task-card">
                 <a href="{{ route('tasks.show', $task) }}" class="task-card__title">
@@ -129,7 +119,6 @@
             </span>
             <span class="board-col__count">{{ $reviewTasks->count() }}</span>
         </div>
-
         @forelse($reviewTasks as $task)
             <div class="task-card">
                 <a href="{{ route('tasks.show', $task) }}" class="task-card__title">
@@ -165,7 +154,6 @@
             </span>
             <span class="board-col__count">{{ $doneTasks->count() }}</span>
         </div>
-
         @forelse($doneTasks as $task)
             <div class="task-card" style="opacity:0.75;">
                 <a href="{{ route('tasks.show', $task) }}" class="task-card__title"
@@ -190,4 +178,10 @@
     </div>
 
 </div>
+
+{{-- Floating Action Button untuk mobile --}}
+<a href="{{ route('tasks.create') }}" class="fab fab-mobile" title="Tambah Tugas">
+    <span class="fab-icon">+</span>
+</a>
+
 @endsection

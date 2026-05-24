@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Search & Filter — TaskFlow')
+@section('title', 'Cari & Filter — KerjainAjaDulu')
 
 @section('content')
 <div class="page-header">
@@ -29,10 +29,10 @@
                     <label class="form-label">Status</label>
                     <select name="status" class="form-control">
                         <option value="">Semua status</option>
-                        <option value="todo"        {{ request('status') == 'todo'        ? 'selected' : '' }}>To Do</option>
-                        <option value="in_progress" {{ request('status') == 'in_progress' ? 'selected' : '' }}>In Progress</option>
-                        <option value="review"      {{ request('status') == 'review'      ? 'selected' : '' }}>Review</option>
-                        <option value="done"        {{ request('status') == 'done'        ? 'selected' : '' }}>Done</option>
+                        <option value="todo"        {{ request('status') == 'todo'        ? 'selected' : '' }}>Belum Dikerjakan</option>
+                        <option value="in_progress" {{ request('status') == 'in_progress' ? 'selected' : '' }}>Sedang Dikerjakan</option>
+                        <option value="review"      {{ request('status') == 'review'      ? 'selected' : '' }}>Direview</option>
+                        <option value="done"        {{ request('status') == 'done'        ? 'selected' : '' }}>Selesai</option>
                     </select>
                 </div>
 
@@ -40,9 +40,9 @@
                     <label class="form-label">Prioritas</label>
                     <select name="priority" class="form-control">
                         <option value="">Semua prioritas</option>
-                        <option value="high"   {{ request('priority') == 'high'   ? 'selected' : '' }}>🔴 High</option>
-                        <option value="medium" {{ request('priority') == 'medium' ? 'selected' : '' }}>🟡 Medium</option>
-                        <option value="low"    {{ request('priority') == 'low'    ? 'selected' : '' }}>🟢 Low</option>
+                        <option value="high"   {{ request('priority') == 'high'   ? 'selected' : '' }}>🔴 Tinggi</option>
+                        <option value="medium" {{ request('priority') == 'medium' ? 'selected' : '' }}>🟡 Sedang</option>
+                        <option value="low"    {{ request('priority') == 'low'    ? 'selected' : '' }}>🟢 Rendah</option>
                     </select>
                 </div>
 
@@ -79,7 +79,8 @@
                     @foreach($tasks as $task)
                     @php
                         $statusMap   = ['todo'=>'badge-todo','in_progress'=>'badge-inprogress','review'=>'badge-review','done'=>'badge-done'];
-                        $statusLabel = ['todo'=>'To Do','in_progress'=>'In Progress','review'=>'Review','done'=>'Done'];
+                        $statusLabel = ['todo'=>'Belum Dikerjakan','in_progress'=>'Sedang Dikerjakan','review'=>'Direview','done'=>'Selesai'];
+                        $priorityLabel = ['high'=>'Tinggi','medium'=>'Sedang','low'=>'Rendah'];
                     @endphp
                     <tr>
                         <td>
@@ -101,7 +102,7 @@
                             </span>
                         </td>
                         <td>
-                            <span class="badge badge-{{ $task->priority }}">{{ ucfirst($task->priority) }}</span>
+                            <span class="badge badge-{{ $task->priority }}">{{ $priorityLabel[$task->priority] ?? ucfirst($task->priority) }}</span>
                         </td>
                         <td style="font-size:0.8125rem; color: var(--color-text-muted);">
                             @if($task->due_date)
