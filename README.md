@@ -214,43 +214,43 @@ Tabel untuk preferensi atau pengaturan kustom per user.
 > 📁 Simpan screenshot di folder `public/screenshots/` dan perbarui path gambar di bawah ini sesuai file yang ada.
 
 ### 1. Halaman Utama (Landing Page)
-![Landing Page](public/screenshots/landing_page.png)
+![Landing Page](./public/screenshots/landing_page.png)
 *Tampilan awal yang memperkenalkan fitur-fitur utama aplikasi KerjainAjaDulu.*
 
 ### 2. Halaman Login
-![Login](public/screenshots/login.png)
+![Login](./public/screenshots/login.png)
 *Form autentikasi masuk bagi pengguna terdaftar.*
 
 ### 3. Halaman Register
-![Register](public/screenshots/register.png)
+![Register](./public/screenshots/register.png)
 *Pendaftaran akun tim baru secara cepat.*
 
 ### 4. Project Board (Kanban Layout)
-![Project Board](public/screenshots/halaman_project.png)
+![Project Board](./public/screenshots/halaman_project.png)
 *Tampilan utama pengelolaan tugas dengan kolom interaktif.*
 
 ### 5. Detail Tugas & Komentar
-![Detail Tugas](public/screenshots/halaman_tugas.png)
+![Detail Tugas](./public/screenshots/halaman_tugas.png)
 *Halaman detail informasi tugas serta diskusi tim.*
 
 ### 6. Tambah Tugas Baru
-![Tambah Tugas](public/screenshots/halaman_tambah_tugas.png)
+![Tambah Tugas](./public/screenshots/halaman_tambah_tugas.png)
 *Halaman form tambah tugas baru.*
 
 ### 7. Cari & Filter Tugas
-![Cari Filter](public/screenshots/halaman_filter.png)
+![Cari Filter](./public/screenshots/halaman_filter.png)
 *Pencarian tugas dan penyaringan berdasarkan status, kategori, atau prioritas.*
 
 ### 8. Statistik Progress Tim
-![Progress](public/screenshots/halaman_progres.png)
+![Progress](./public/screenshots/halaman_progres.png)
 *Grafik dan visualisasi data performa tugas.*
 
 ### 9. Halaman Tim
-![Tim](public/screenshots/halaman_tim.png)
+![Tim](./public/screenshots/halaman_tim.png)
 *Halaman manajemen dan daftar anggota tim.*
 
 ### 10. Arsip Tugas
-![Arsip Tugas](public/screenshots/halaman_arsip.png)
+![Arsip Tugas](./public/screenshots/halaman_arsip.png)
 *Halaman daftar tugas-tugas yang telah diarsipkan.*
 
 ### 11. Halaman Pengaturan
