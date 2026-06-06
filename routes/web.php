@@ -6,9 +6,20 @@ use App\Http\Controllers\TaskController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\AccountController;
+
+/*
+|--------------------------------------------------------------------------
+| Landing Page
+|--------------------------------------------------------------------------
+*/
+Route::get('/', function () {
+    if (auth()->check()) {
+        return redirect()->route('tasks.index');
+    }
+    return view('landing');
+})->name('landing');
 
 /*
 |--------------------------------------------------------------------------
@@ -16,10 +27,10 @@ use App\Http\Controllers\AccountController;
 |--------------------------------------------------------------------------
 */
 Route::middleware('guest')->group(function () {
-    Route::get('/login',    [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/login',   [AuthController::class, 'login'])->name('login.post');
-    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-    Route::post('/register',[AuthController::class, 'register'])->name('register.post');
+    Route::get('/login',     [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login',    [AuthController::class, 'login'])->name('login.post');
+    Route::get('/register',  [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 });
 
 /*
@@ -29,41 +40,35 @@ Route::middleware('guest')->group(function () {
 */
 Route::middleware('auth')->group(function () {
 
-    // Logout
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    // ── Tasks (Board) ──────────────────────────────────────────
-    Route::get('/',                 [TaskController::class, 'index'])->name('tasks.index');
-    Route::get('/tasks/create',     [TaskController::class, 'create'])->name('tasks.create');
-    Route::post('/tasks',           [TaskController::class, 'store'])->name('tasks.store');
-    Route::get('/tasks/search',     [TaskController::class, 'search'])->name('tasks.search');
-    Route::get('/tasks/archive',    [TaskController::class, 'archive'])->name('tasks.archive');
-    Route::get('/tasks/{task}',     [TaskController::class, 'show'])->name('tasks.show');
-    Route::get('/tasks/{task}/edit',[TaskController::class, 'edit'])->name('tasks.edit');
-    Route::put('/tasks/{task}',     [TaskController::class, 'update'])->name('tasks.update');
-    Route::delete('/tasks/{task}',  [TaskController::class, 'destroy'])->name('tasks.destroy');
-    Route::put('/tasks/{task}/archive', [TaskController::class, 'archiveTask'])->name('tasks.archive-task');
-    Route::put('/tasks/{task}/restore', [TaskController::class, 'restore'])->name('tasks.restore');
+    // Tasks
+    Route::get('/board',                [TaskController::class, 'index'])->name('tasks.index');
+    Route::get('/tugas/tambah',         [TaskController::class, 'create'])->name('tasks.create');
+    Route::post('/tugas',               [TaskController::class, 'store'])->name('tasks.store');
+    Route::get('/tugas/cari',           [TaskController::class, 'search'])->name('tasks.search');
+    Route::get('/tugas/arsip',          [TaskController::class, 'archive'])->name('tasks.archive');
+    Route::get('/tugas/{task}',         [TaskController::class, 'show'])->name('tasks.show');
+    Route::get('/tugas/{task}/edit',    [TaskController::class, 'edit'])->name('tasks.edit');
+    Route::put('/tugas/{task}',         [TaskController::class, 'update'])->name('tasks.update');
+    Route::delete('/tugas/{task}',      [TaskController::class, 'destroy'])->name('tasks.destroy');
+    Route::put('/tugas/{task}/arsip',   [TaskController::class, 'archiveTask'])->name('tasks.archive-task');
+    Route::put('/tugas/{task}/restore', [TaskController::class, 'restore'])->name('tasks.restore');
 
-    // ── Comments ───────────────────────────────────────────────
-    Route::post('/tasks/{task}/comments', [CommentController::class, 'store'])->name('tasks.comments.store');
+    // Comments
+    Route::post('/tugas/{task}/komentar', [CommentController::class, 'store'])->name('tasks.comments.store');
 
-    // ── Dashboard ──────────────────────────────────────────────
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Dashboard
+    Route::get('/progress', [DashboardController::class, 'index'])->name('dashboard');
 
-    // ── Team ───────────────────────────────────────────────────
-    Route::get('/team', [TeamController::class, 'index'])->name('team.index');
+    // Team
+    Route::get('/tim', [TeamController::class, 'index'])->name('team.index');
 
-    // ── Notifications ──────────────────────────────────────────
-    Route::get('/notifications',        [NotificationController::class, 'index'])->name('notifications');
-    Route::post('/notifications/read-all', [NotificationController::class, 'readAll'])->name('notifications.read-all');
+    // Settings
+    Route::get('/pengaturan', [SettingsController::class, 'index'])->name('settings');
+    Route::put('/pengaturan', [SettingsController::class, 'update'])->name('settings.update');
 
-    // ── Settings ───────────────────────────────────────────────
-    Route::get('/settings',    [SettingsController::class, 'index'])->name('settings');
-    Route::put('/settings',    [SettingsController::class, 'update'])->name('settings.update');
-
-    // ── Account ────────────────────────────────────────────────
-    Route::get('/account',             [AccountController::class, 'index'])->name('account');
-    Route::put('/account',             [AccountController::class, 'update'])->name('account.update');
-    Route::put('/account/password',    [AccountController::class, 'updatePassword'])->name('account.password');
+    // Account
+    Route::get('/akun', [AccountController::class, 'index'])->name('account');
+    Route::put('/akun', [AccountController::class, 'update'])->name('account.update');
 });
